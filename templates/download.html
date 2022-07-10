@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+	</script>
+	<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+
+<body id="eValue">
+ <a href="http://127.0.0.1:5000/contactUs" target="_blank">Contact</a>
+	<center style="position:fixed">
+		<span style="position:fixed;top:1%;text-align:left"><label> Font Size Change</label><br>
+		<select class="10-30" id="selectedValue" onchange="valueOpted()">
+			<option value="" selected disabled hidden>Fonts</option>
+		</select><br>
+		<h>
+			<title>File Download</title>
+<h2>Please Click below Link to Download the file</h2>
+<p>
+	<a href="{{ url_for('.download_file') }}">Download</a>
+	<a href="{{ url_for('logout') }}"><button style="position:fixed;right:1%;top:1%" onclick="browserClose()">Logout</button></a>
+
+</p>
+<div id="fields">
+     <input id="btnAdd1" type="button" value="+" onclick="addField()" />
+    <!--Textboxes will be added here -->
+</div>
+
+
+<a href="http://127.0.0.1:5000/softwareEngineering" target="_blank">Software Engineering</a> <br />
+			      <a href="https://en.wikipedia.org/wiki/Cloud_computing" target="_blank"> Cloud Computing </a><br />
+			<a href="https://www.python.org/" target="_blank"> Python </a><br />
+			<a href="http://127.0.0.1:5000/flag" target="_blank"> About the Flag </a><br />
+
+		</h>
+</span>
+	<script type="text/javascript">
+		$(function(){
+    var $select = $(".10-30");
+    for (i=10;i<=30;i++){
+    $select.append($('<option></option>').val(i).html(i))
+    }
+});
+function valueOpted(){
+var eSelectedValue= document.getElementById("selectedValue");
+var value= eSelectedValue && eSelectedValue.options[eSelectedValue.selectedIndex] && eSelectedValue.options[eSelectedValue.selectedIndex].value;
+document.getElementById("eValue").style.fontSize= value+"px";
+}
+
+
+                //the array
+                function printBtn() {
+                var colorArray =['LightBlue','LightPink','LavenderBlush','Blue','Aqua','Thistle','Plum'];
+                    for (var i = 0; i < colorArray.length; i++) {
+                       var btn = document.createElement("button");
+                       btn.setAttribute('id',colorArray[i]);
+                       var t = document.createTextNode(colorArray[i]);
+                       var id=document.getElementById(colorArray[i]);
+                       btn.appendChild(t);
+                       document.body.appendChild(btn);
+                       btn.onclick=function(e){
+                       colorOpted(e.target.id)};
+                    }
+                    addField();
+}
+
+
+
+function colorOpted(eColor){
+console.log("here");
+document.getElementById("eValue").style.backgroundColor=eColor;
+}
+function getInputField(value){
+    return '<input type="button" value="-" onclick = "removeField(this)" /> ' + " " +
+            ' <input name = "textBox" type="text" value = "' + value + '" /> '
+}
+function addField() {
+    var div = document.createElement('SPAN');
+    div.innerHTML = getInputField("");
+    document.getElementById("fields").appendChild(div);
+}
+
+function removeField(div) {
+    document.getElementById("fields").removeChild(div.parentNode);
+}
+function browserClose(){
+window.close();
+}
+
+
+	</script>
+
+	</center>
+    <footer >
+  <body onload="printBtn();" style="position: absolute; bottom:0;display:block">
+<b>Select the background color of your choice</b>
+          </body>
+        </footer>
+</body>
+</html>

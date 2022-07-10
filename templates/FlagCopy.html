@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+   <head> <link href="{{url_for('static', filename = 'Flag.css')}}" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Flag</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+       <style>
+    .preview-image {
+      height: 200px;
+      width: 100%;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .custom-file-upload {
+      text-align: center;
+      border: 1px solid #ccc;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    #paragraph {
+      font-size: 30px;
+      line-height: 50px;
+    }
+
+    body {
+      font-family: Verdana;
+    }
+
+    .columnu {
+      float: left;
+      width: 31%;
+      color: #3182ce;
+      background-color: white;
+      margin-top: 7px;
+      margin-left: 10px;
+      border-radius: 10px;
+    }
+
+    .rowu {
+      width: 80%;
+      margin: auto;
+      text-align: center;
+    }
+
+    /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+    @media screen and (max-width: 500px) {
+      .columnu {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<h2>Select image to upload</h2>
+<p>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+		<ul>
+		{% for message in messages %}
+		  <li>{{ message }}</li>
+		{% endfor %}
+		</ul>
+	  {% endif %}
+	{% endwith %}
+</p>
+{% if filename %}
+<div class="frameClass">
+<!--  style=" position: relative; width: 500px; overflow: hidden; cursor: zoom-in;", style=" transition: opacity .5s;display: block;width: 100%;" -->
+<figure class='goOnZoom'  style="background-image: url({{ url_for('static', filename='uploader/upload.png') }});"  onmousemove="zoom(event)" ontouchmove="zoom(event)">
+	<img src="{{ url_for('static', filename='uploader/upload.png') }}">
+</figure>
+<br />
+    <a href="https://en.wikipedia.org/wiki/Flag_of_the_United_States" target="_blank"> Flag_of_the_United_States </a><br />
+</div>
+{% endif %}
+<form id="form" method="post" action="/uploadSubmit" enctype="multipart/form-data">
+
+ <label class="custom-file-upload">
+      <img src="{{url_for('static', filename='uploader/upload.png')}}" width="18%" height="18%">
+      <input type="file" name="file" id="file" onchange="document.getElementById('upload').click()" />
+      Insert
+    </label>
+
+        <input type="button" value="Delete" onclick = "removeField(australia)" id="deleteField"/>
+		<p>
+			<input type="submit" value="Submit"></p>
+</form>
+    <br>
+
+    <div class="rowu">
+    {% for upload in uploads %}             <!--          This is the jinja2 tempate for writing any kind of loops or conditionals          -->
+    {% if ('png' in upload) or ('jpg' in upload) or ('jpeg' in upload) %}
+    <!--          Display only the jpg,png,jpeg file formats          -->
+    {% if ('United' in upload) %}
+      <div class="frameClass"  id="frame">
+        <div class="columnu" id="columnu" style="border: 3px solid #ccc;">
+            <figure class='goOnZoom'  style="background-image: url({{url_for('static', filename=upload)}});"  onmousemove="zoom(event)" ontouchmove="zoom(event)">
+	 <img class="preview-image" src="{{url_for('static', filename=upload)}}" alt="{{upload}}">
+        </figure>
+            {% if ('United' in upload) %}
+              <a href="https://en.wikipedia.org/wiki/Flag_of_the_United_States" target="_blank"> About Flag_of_the_United_States </a>
+            {% endif %}
+            {% if ('Australia' in upload) %}
+              <a href="https://en.wikipedia.org/wiki/Flag_of_Australia" target="_blank"> About Flag_of_the_Australia </a>
+            {% endif %}
+            <br />
+
+        {% print(upload.split("/")[1][:20]) %}
+
+
+         <textarea rows="6" cols="33"name="box_name"   onChange="maxlength(this, 200)" onblur="maxlength(getElementById('box_id'), 200)"
+        pattern="^(?:\b\w+\b[\s\r\n]*){1,200}$">
+        </textarea>
+        </div>
+        </div>
+     {% endif %}
+    {% endif %}
+    {% endfor %}
+
+
+  </div>
+
+  <div class="rowu" id="australia">
+    {% for upload in uploads %}             <!--          This is the jinja2 tempate for writing any kind of loops or conditionals          -->
+    {% if ('png' in upload) or ('jpg' in upload) or ('jpeg' in upload) %}
+    <!--          Display only the jpg,png,jpeg file formats          -->
+     {% if ('Australia' in upload) %}
+        <div class="frameClass"  id="frameClass">
+        <div class="columnu" id="{{url_for('static', filename=upload)}}" style="border: 3px solid #ccc;">
+            <figure class='goOnZoom'  style="background-image: url({{url_for('static', filename=upload)}});"  onmousemove="zoom(event)" ontouchmove="zoom(event)">
+	     <img class="preview-image" src="{{url_for('static', filename=upload)}}" alt="{{upload}}">
+            </figure>
+            {% if ('United' in upload) %}
+              <a href="https://en.wikipedia.org/wiki/Flag_of_the_United_States" target="_blank"> About Flag_of_the_United_States </a>
+            {% endif %}
+            {% if ('Australia' in upload) %}
+              <a href="https://en.wikipedia.org/wiki/Flag_of_Australia" target="_blank"> About Flag_of_the_Australia </a>
+            {% endif %}
+            <br />
+
+        {% print(upload.split("/")[1][:20]) %}
+
+
+         <textarea rows="6" cols="33"name="box_name"   onChange="maxlength(this, 200)" onblur="maxlength(getElementById('box_id'), 200)"
+        pattern="^(?:\b\w+\b[\s\r\n]*){1,200}$">
+        </textarea>
+        </div>
+         </div>
+      {% endif %}
+    {% endif %}
+    {% endfor %}
+
+
+  </div>
+
+<script type="text/javascript">
+function zoom(e){
+console.log("Meghanacheck", e.currentTarget);
+  var zoomer = e.currentTarget;
+  e.offsetX ? offsetX = e.offsetX : offsetX = e.touches[0].pageX
+  e.offsetY ? offsetY = e.offsetY : offsetX = e.touches[0].pageX
+  x = offsetX/zoomer.offsetWidth*100
+  y = offsetY/zoomer.offsetHeight*100
+  zoomer.style.backgroundPosition = x + '% ' + y + '%';
+}
+ function maxlength(element, maxvalue){
+    var q = element.value.split(/[\s]+/).length;
+    console.log("heremeghana", q);
+    if(q > maxvalue){
+        var r = q - maxvalue;
+        alert("Sorry, you have input "+q+" words into the "+
+        "text area box you just completed. It can return no more than "+
+        maxvalue+" words to be processed. Please abbreviate "+
+        "your text by at least "+r+" words");
+        return false;
+    }
+}
+function removeField(div) {
+console.log("hereim",div);
+<!-- var getParentID = (div).parentNode.parentNode.remove();-->
+div.remove();
+}</script>
+
+</html>

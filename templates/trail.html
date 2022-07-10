@@ -1,0 +1,25 @@
+<html><form id="form1" runat="server">
+<input id="btnAdd" type="button" value="+" onclick="addField()" />
+<div id="fields">
+    <!--Textboxes will be added here -->
+</div>
+<br />
+</form>
+<script type="text/javascript">
+function getInputField(value){
+    return '<input type="button" value="-" onclick = "removeField(this)" /> ' + " " +
+            ' <input name = "textBox" type="text" value = "' + value + '" />  <br>'
+}
+function addField() {
+    var div = document.createElement('DIV');
+    div.innerHTML = getInputField("");
+    document.getElementById("fields").appendChild(div);
+}
+
+function removeField(div) {
+    document.getElementById("fields").removeChild(div.parentNode);
+}
+window.onload = addField;
+
+</script>
+</html>

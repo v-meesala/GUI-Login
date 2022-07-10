@@ -1,0 +1,27 @@
+<html><form id="form1" runat="server">
+<input id="btnAdd" type="button" value="add" onclick="AddSuggestionCart()" />
+<br />
+<br />
+<div id="SuggestionCartContainer">
+    <!--Textboxes will be added here -->
+</div>
+<br />
+</form>
+<script type="text/javascript">
+function GetDynamicSuggestionCart(value){
+    return '<input name = "DynamicSuggestionCart" type="text" value = "' + value + '" />' +
+            '<input type="button" value="Remove" onclick = "RemoveSuggestionCart(this)" />'
+}
+function AddSuggestionCart() {
+    var div = document.createElement('DIV');
+    div.innerHTML = GetDynamicSuggestionCart("");
+    document.getElementById("SuggestionCartContainer").appendChild(div);
+}
+
+function RemoveSuggestionCart(div) {
+    document.getElementById("SuggestionCartContainer").removeChild(div.parentNode);
+}
+
+
+</script>
+</html>
