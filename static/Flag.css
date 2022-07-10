@@ -1,0 +1,16 @@
+figure.goOnZoom {
+  position: relative;
+  overflow: inherit;
+    cursor: zoom-in;
+}
+figure.goOnZoom img {
+  transition: opacity .5s;
+  display: block;
+    width: 100%;
+}
+figure.goOnZoom img:hover { opacity: 0; }
+
+div.frameClass {
+        background: #eee;
+         margin: auto;
+      }
